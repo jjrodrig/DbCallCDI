@@ -29,7 +29,7 @@ private DBTester dbTester;
 
 ...
 
-ProcedureResult<String> result =dbTester.callEchoEmptyAsFunction();
+ProcedureResult<String> result = dbTester.callEchoAsProcedure(testVal);
 ```
 
 Check tests for detailed use.
