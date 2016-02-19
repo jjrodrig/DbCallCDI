@@ -12,12 +12,15 @@
  *******************************************************************************/
 package es.indaba.jdbc.annotations.api;
 
+import java.lang.annotation.Annotation;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import javax.enterprise.inject.Default;
+import javax.enterprise.util.Nonbinding;
 import javax.interceptor.InterceptorBinding;
 
 @InterceptorBinding
@@ -25,5 +28,17 @@ import javax.interceptor.InterceptorBinding;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface DatabaseCall {
+
+	
+	/**
+     * Optional qualifier/s which allow/s to select the EntityManager to use for invoking the database 
+     * stored procedure. 
+     * Default-value is {@link Default} which means default {@link javax.persistence.EntityManager} will
+     * be injected.
+     * When the qualifier is specified the qualified {@link javax.persistence.EntityManager} will be injected
+     * 
+     * @return target persistence-unit identifier
+     */
+    @Nonbinding Class<? extends Annotation> qualifier() default Default.class;
 
 }
