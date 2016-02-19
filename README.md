@@ -34,6 +34,7 @@ ProcedureResult<String> result = dbTester.callEchoAsProcedure(testVal);
 
 Using EntityManager Qualifier
 
+```java
 @ApplicationScoped
 public interface DBTester {
 
@@ -43,5 +44,5 @@ public interface DBTester {
   public ProcedureResult<String> callEchoAsProcedure(@StoredProcedureParameter(1) String name) throws Exception;
 
 }
-
+```
 Check tests for detailed use.
