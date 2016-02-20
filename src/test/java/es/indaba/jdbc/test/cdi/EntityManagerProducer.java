@@ -25,7 +25,8 @@ import javax.persistence.Persistence;
 public class EntityManagerProducer {
 
     private EntityManagerFactory entityManagerFactory;
-	
+	private EntityManagerFactory secondEntityManagerFactory;
+    
     @Produces
     @ApplicationScoped
     @Default
@@ -40,10 +41,10 @@ public class EntityManagerProducer {
     @ApplicationScoped
     @SecondEM
     public EntityManager getEntityManagerSecond() {
-    	if(entityManagerFactory == null){
-    		entityManagerFactory = Persistence.createEntityManagerFactory("secondPersistence");
+    	if(secondEntityManagerFactory == null){
+    		secondEntityManagerFactory = Persistence.createEntityManagerFactory("secondPersistence");
     	}
-        return entityManagerFactory.createEntityManager();
+        return secondEntityManagerFactory.createEntityManager();
     }
     
     public void close(@Disposes @Any EntityManager em) {

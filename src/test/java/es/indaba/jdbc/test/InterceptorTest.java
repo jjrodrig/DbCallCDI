@@ -24,6 +24,7 @@ import org.apache.commons.lang.time.DateUtils;
 import org.apache.deltaspike.core.api.provider.BeanProvider;
 import org.junit.Test;
 
+import es.indaba.jdbc.test.extension.DBTester;
 import es.indaba.jdbc.test.interceptor.TestBean;
 import es.indaba.jdbc.test.result.ProcedureResult;
 
@@ -114,5 +115,21 @@ public class InterceptorTest extends AbstractTest{
 		result = testService.callEchoTimestampAsProcedure(testVal);
 		assertNotNull(result);
 		assertEquals(testVal, result.getValue());
-	}	
+	}
+	
+	@Test
+	public void echoEMTest() throws Exception {
+		TestBean testService = BeanProvider.getContextualReference(TestBean.class, false);
+		ProcedureResult<String> result = testService.callEchoEM();
+		assertNotNull(result);
+		assertEquals("default", result.getValue());
+	}
+	
+	@Test
+	public void echoEMTestSecond() throws Exception {
+		TestBean testService = BeanProvider.getContextualReference(TestBean.class, false);
+		ProcedureResult<String> result = testService.callEchoEMSecond();
+		assertNotNull(result);
+		assertEquals("second", result.getValue());
+	}
 }

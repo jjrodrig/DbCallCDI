@@ -29,7 +29,7 @@
   	<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
-			<property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:standalone"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:standalone2"/>
 			<property name="javax.persistence.jdbc.user" value="sa"/>
 			<property name="javax.persistence.jdbc.password" value=""/>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
