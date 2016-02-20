@@ -24,7 +24,6 @@ import org.apache.commons.lang.time.DateUtils;
 import org.apache.deltaspike.core.api.provider.BeanProvider;
 import org.junit.Test;
 
-import es.indaba.jdbc.test.extension.DBTester;
 import es.indaba.jdbc.test.interceptor.TestBean;
 import es.indaba.jdbc.test.result.ProcedureResult;
 
