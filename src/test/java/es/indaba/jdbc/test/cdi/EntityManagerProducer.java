@@ -26,6 +26,7 @@ public class EntityManagerProducer {
 
     private EntityManagerFactory entityManagerFactory;
 	private EntityManagerFactory secondEntityManagerFactory;
+	private EntityManagerFactory postgreEntityManagerFactory;
     
     @Produces
     @ApplicationScoped
@@ -45,6 +46,16 @@ public class EntityManagerProducer {
     		secondEntityManagerFactory = Persistence.createEntityManagerFactory("secondPersistence");
     	}
         return secondEntityManagerFactory.createEntityManager();
+    }
+    
+    @Produces
+    @ApplicationScoped
+    @PostgreSQL
+    public EntityManager getEntityManagerPostgre() {
+    	if(postgreEntityManagerFactory == null){
+    		postgreEntityManagerFactory = Persistence.createEntityManagerFactory("postgrePersistence");
+    	}
+        return postgreEntityManagerFactory.createEntityManager();
     }
     
     public void close(@Disposes @Any EntityManager em) {
