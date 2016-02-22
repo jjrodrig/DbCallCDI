@@ -23,8 +23,11 @@ import org.apache.deltaspike.cdise.api.CdiContainer;
 import org.apache.deltaspike.cdise.api.CdiContainerLoader;
 import org.apache.deltaspike.cdise.api.ContextControl;
 import org.apache.deltaspike.core.api.provider.BeanProvider;
+import org.apache.deltaspike.core.util.metadata.AnnotationInstanceProvider;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+
+import es.indaba.jdbc.test.cdi.SecondEM;
 
 public abstract class AbstractTest {
 	
@@ -44,14 +47,21 @@ public abstract class AbstractTest {
 
 	@AfterClass
 	public static void tearDown() {
-		clearDatabase();
+		clearDatabases();
 		contextControl.stopContexts();
 		cdiContainer.shutdown();
 	}
 
-	private static void clearDatabase() {
-		EntityManager em = BeanProvider.getContextualReference(
-				EntityManager.class, false);
+	
+	
+	private static void clearDatabases() {
+		EntityManager defaultEm = BeanProvider.getContextualReference(EntityManager.class, false);	
+		clearDatabase(defaultEm);
+		EntityManager secondEm = BeanProvider.getContextualReference(EntityManager.class, false, AnnotationInstanceProvider.of(SecondEM.class));
+		clearDatabase(secondEm);
+	}
+
+	private static void clearDatabase(EntityManager em) {
 		Query q = em.createNativeQuery("DROP SCHEMA PUBLIC CASCADE");
 		try {
 			em.getTransaction().begin();
