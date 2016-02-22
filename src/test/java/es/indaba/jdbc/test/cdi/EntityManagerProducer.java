@@ -13,6 +13,8 @@
 package es.indaba.jdbc.test.cdi;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
@@ -23,17 +25,29 @@ import javax.persistence.Persistence;
 public class EntityManagerProducer {
 
     private EntityManagerFactory entityManagerFactory;
-	
+	private EntityManagerFactory secondEntityManagerFactory;
+    
     @Produces
     @ApplicationScoped
-    public EntityManager getEntityManager() {
+    @Default
+    public EntityManager getEntityManagerDefault() {
     	if(entityManagerFactory == null){
-    		entityManagerFactory = Persistence.createEntityManagerFactory("testPersistence");
+    		entityManagerFactory = Persistence.createEntityManagerFactory("defaultPersistence");
     	}
         return entityManagerFactory.createEntityManager();
     }
     
-    public void close(@Disposes EntityManager em) {
+    @Produces
+    @ApplicationScoped
+    @SecondEM
+    public EntityManager getEntityManagerSecond() {
+    	if(secondEntityManagerFactory == null){
+    		secondEntityManagerFactory = Persistence.createEntityManagerFactory("secondPersistence");
+    	}
+        return secondEntityManagerFactory.createEntityManager();
+    }
+    
+    public void close(@Disposes @Any EntityManager em) {
         if (em.isOpen()) {
             em.close();
         }

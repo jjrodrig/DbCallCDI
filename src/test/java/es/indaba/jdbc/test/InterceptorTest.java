@@ -114,5 +114,21 @@ public class InterceptorTest extends AbstractTest{
 		result = testService.callEchoTimestampAsProcedure(testVal);
 		assertNotNull(result);
 		assertEquals(testVal, result.getValue());
-	}	
+	}
+	
+	@Test
+	public void echoEMTest() throws Exception {
+		TestBean testService = BeanProvider.getContextualReference(TestBean.class, false);
+		ProcedureResult<String> result = testService.callEchoEM();
+		assertNotNull(result);
+		assertEquals("default", result.getValue());
+	}
+	
+	@Test
+	public void echoEMTestSecond() throws Exception {
+		TestBean testService = BeanProvider.getContextualReference(TestBean.class, false);
+		ProcedureResult<String> result = testService.callEchoEMSecond();
+		assertNotNull(result);
+		assertEquals("second", result.getValue());
+	}
 }

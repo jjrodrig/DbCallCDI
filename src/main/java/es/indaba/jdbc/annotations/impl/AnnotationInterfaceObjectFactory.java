@@ -12,15 +12,21 @@
  *******************************************************************************/
 package es.indaba.jdbc.annotations.impl;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
-import javassist.util.proxy.MethodHandler;
-import javassist.util.proxy.ProxyFactory;
-
+import javax.enterprise.inject.spi.BeanManager;
 import javax.persistence.EntityManager;
 
+import org.apache.deltaspike.core.api.provider.BeanManagerProvider;
 import org.apache.deltaspike.core.api.provider.BeanProvider;
+import org.apache.deltaspike.core.util.AnnotationUtils;
+import org.apache.deltaspike.core.util.metadata.AnnotationInstanceProvider;
 import org.hibernate.Session;
+
+import es.indaba.jdbc.annotations.api.DatabaseCall;
+import javassist.util.proxy.MethodHandler;
+import javassist.util.proxy.ProxyFactory;
 
 @SuppressWarnings("rawtypes")
 public class AnnotationInterfaceObjectFactory<T> {
@@ -32,15 +38,18 @@ public class AnnotationInterfaceObjectFactory<T> {
 		factory.setHandler(new MethodHandler() {
 
 			public Object invoke(Object arg0, Method method, Method arg2, Object[] parameters) throws Throwable {
-
+				
+				BeanManager beanManager = BeanManagerProvider.getInstance().getBeanManager();
+				Annotation[] annotations = method.getAnnotations();
+				DatabaseCall dbCall = AnnotationUtils.findAnnotation(beanManager,annotations, DatabaseCall.class);
+				if (dbCall == null) return null;
+				
 				GenericWork callWork = AnnotationProcessor.buildWork(method, parameters);
-				if (callWork == null)
-					return null;
-				// Recuperar EM
-				EntityManager manager = BeanProvider.getContextualReference(EntityManager.class);
+				if (callWork == null) return null;
+				// Get EM based on provided qualifier
+				EntityManager manager = BeanProvider.getContextualReference(EntityManager.class,false,AnnotationInstanceProvider.of(dbCall.qualifier()));
 				Session delegate = (Session) manager.getDelegate();
 
-				// Ejecutar procedimiento
 				delegate.doWork(callWork);
 
 				return callWork.getResultObject();

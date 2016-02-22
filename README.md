@@ -32,4 +32,17 @@ private DBTester dbTester;
 ProcedureResult<String> result = dbTester.callEchoAsProcedure(testVal);
 ```
 
+Using EntityManager Qualifier
+
+```java
+@ApplicationScoped
+public interface DBTester {
+
+  @StoredProcedure("CALL echoProc(?,?)")
+  @StoredProcedureResult({ @FieldResult(name = "value", position = 2) })
+  @DatabaseCall(qualifier=MyDatabase.class)
+  public ProcedureResult<String> callEchoAsProcedure(@StoredProcedureParameter(1) String name) throws Exception;
+
+}
+```
 Check tests for detailed use.
