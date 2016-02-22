@@ -21,6 +21,7 @@ import es.indaba.jdbc.annotations.api.FieldResult;
 import es.indaba.jdbc.annotations.api.StoredProcedure;
 import es.indaba.jdbc.annotations.api.StoredProcedureParameter;
 import es.indaba.jdbc.annotations.api.StoredProcedureResult;
+import es.indaba.jdbc.test.cdi.SecondEM;
 import es.indaba.jdbc.test.result.ProcedureResult;
 
 @ApplicationScoped
@@ -85,4 +86,13 @@ public interface DBTester {
 	@DatabaseCall
 	public ProcedureResult<Date> callEchoTimestampAsProcedure(@StoredProcedureParameter(value=1, sqlType=java.sql.Timestamp.class) Date name) throws Exception;
 
+	@StoredProcedure("CALL echoEM()")
+	@StoredProcedureResult({ @FieldResult(name = "value", position = FieldResult.RESULTSET) })
+	@DatabaseCall
+	public ProcedureResult<String> callEchoEM() throws Exception;
+	
+	@StoredProcedure("CALL echoEM()")
+	@StoredProcedureResult({ @FieldResult(name = "value", position = FieldResult.RESULTSET) })
+	@DatabaseCall(qualifier=SecondEM.class)
+	public ProcedureResult<String> callEchoEMSecond() throws Exception;
 }

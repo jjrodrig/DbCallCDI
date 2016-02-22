@@ -115,4 +115,20 @@ public class StoredProceduresTest extends AbstractTest {
 		assertNotNull(result);
 		assertEquals(testVal, result.getValue());
 	}
+	
+	@Test
+	public void echoEMTest() throws Exception {
+		DBTester dbTester = BeanProvider.getContextualReference(DBTester.class, false);
+		ProcedureResult<String> result = dbTester.callEchoEM();
+		assertNotNull(result);
+		assertEquals("default", result.getValue());
+	}
+	
+	@Test
+	public void echoEMTestSecond() throws Exception {
+		DBTester dbTester = BeanProvider.getContextualReference(DBTester.class, false);
+		ProcedureResult<String> result = dbTester.callEchoEMSecond();
+		assertNotNull(result);
+		assertEquals("second", result.getValue());
+	}
 }
