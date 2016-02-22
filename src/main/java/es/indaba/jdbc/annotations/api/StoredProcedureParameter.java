@@ -23,11 +23,13 @@ import java.lang.annotation.Target;
 public @interface StoredProcedureParameter {
 
 	/**
-	 * Parameter position in sql expression
+	 * @return Parameter position in sql expression
 	 */
 	int value() default -1;
 
-	/** JDBC type of the parameter. */
+	/** 
+	 * @return JDBC type of the parameter. 
+	 * */
 	@SuppressWarnings("rawtypes")
 	Class sqlType() default Object.class;
 

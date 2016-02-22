@@ -28,6 +28,8 @@ public @interface StoredProcedureResult {
 	/**
 	 * Maps the returning values from the procedure call into properties of the
 	 * returning class.
+	 * 
+	 * @return mapping info
 	 */
 	FieldResult[] value() default {};
 

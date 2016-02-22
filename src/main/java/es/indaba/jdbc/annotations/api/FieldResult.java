@@ -22,23 +22,29 @@ public @interface FieldResult {
 
 	public static int RESULTSET = 0;
 
-	/** Name of the property of the returning type. */
+	/**  
+	 * @return Name of the property of the returning type. 
+	 */
 	String name();
 
 	@SuppressWarnings("rawtypes")
 	/**
-	 * Type of the returning property
+	 * @return Type of the returning property
 	 */
 	Class type() default String.class;
 
 	/**
 	 * Position of the parameter in the call string. Position 0 refers to the
-	 * value obtained form resultset after procedure invocation. Any position >
+	 * value obtained form resultset after procedure invocation. Any position
 	 * 0 will be registered as an OUT parameter
+	 * 
+	 * @return the position
 	 */
 	int position();
 
-	/** JDBC type of the parameter. */
+	/**  
+	 * @return JDBC type of the parameter 
+	 * */
 	@SuppressWarnings("rawtypes")
 	Class sqlType() default Object.class;
 }
