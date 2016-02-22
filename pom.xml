@@ -1,15 +1,11 @@
-<!--
-     This program is free software: you can redistribute it and/or modify it under
-     the terms of the GNU Lesser General Public License as published by the Free
-     Software Foundation, either version 3 of the License, or (at your option) any
-     later version. This program is distributed in the hope that it will be
-     useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
-     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
-     Public License for more details. You should have received a copy of the GNU
-     Lesser General Public License along with this program. If not, see
-     <http://www.gnu.org/licenses/>
-     
- -->
+<!-- This program is free software: you can redistribute it and/or modify 
+	it under the terms of the GNU Lesser General Public License as published 
+	by the Free Software Foundation, either version 3 of the License, or (at 
+	your option) any later version. This program is distributed in the hope that 
+	it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty 
+	of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General 
+	Public License for more details. You should have received a copy of the GNU 
+	Lesser General Public License along with this program. If not, see <http://www.gnu.org/licenses/> -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -17,6 +13,36 @@
 	<artifactId>DbCallCDI</artifactId>
 	<version>1.0</version>
 	<name>DB Call CDI Extension</name>
+	<description>A CDI Extension to call stored procedures or database functions declaratively using hibernate.</description>
+	<url>https://github.com/IndabaConsultores/DbCallCDI</url>
+
+	<licenses>
+		<license>
+			<name>GNU LESSER GENERAL PUBLIC LICENSE Version 3</name>
+			<url>http://www.gnu.org/licenses/lgpl-3.0.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<scm>
+		<url>https://github.com/IndabaConsultores/DbCallCDI.git</url>
+	</scm>
+
+	<developers>
+		<developer>
+			<name>Juan José Rodríguez</name>
+			<email>jjrodriguez@indaba.es</email>
+			<organization>Indaba Consultores S.L.</organization>
+			<organizationUrl>http://www.indaba.es</organizationUrl>
+		</developer>
+		<developer>
+			<name>Joseba Urkiri</name>
+			<email>jurkiri@indaba.es</email>
+			<organization>Indaba Consultores S.L.</organization>
+			<organizationUrl>http://www.indaba.es</organizationUrl>
+		</developer>
+	</developers>
+
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
