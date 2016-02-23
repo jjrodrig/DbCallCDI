@@ -80,3 +80,9 @@ public interface DBTester {
 }
 ```
 Check tests for detailed use.
+
+## References
+* JPA 2.1 Stored Procedure Support - http://docs.oracle.com/javaee/7/api/javax/persistence/StoredProcedureQuery.html
+* JDBC CallableStatement - https://docs.oracle.com/javase/7/docs/api/java/sql/CallableStatement.html
+* CDI Extension - https://docs.jboss.org/weld/reference/latest/en-US/html/extend.html
+* @DeltaSpike - https://deltaspike.apache.org/index.html
