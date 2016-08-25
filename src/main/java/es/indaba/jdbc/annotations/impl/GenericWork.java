@@ -123,8 +123,13 @@ public class GenericWork implements Work {
 				}
 			}
 		} catch (Exception e) {
+			
 			logger.log(Level.SEVERE, e.getMessage(), e);
+			
+		} finally {
+			if (st!=null) st.close();
 		}
+		
 	}
 
 	public Object getResultObject() {
