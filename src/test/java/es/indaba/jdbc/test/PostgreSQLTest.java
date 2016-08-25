@@ -16,11 +16,13 @@ import org.apache.deltaspike.cdise.api.ContextControl;
 import org.apache.deltaspike.core.api.provider.BeanProvider;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import es.indaba.jdbc.test.extension.PostgreDBTester;
 import es.indaba.jdbc.test.result.ProcedureResult;
 
+@Ignore("Depends on ElephandSQL Service")
 public class PostgreSQLTest  {
 	
 	private static final Logger logger = Logger.getLogger(AbstractTest.class.getName());
@@ -44,7 +46,8 @@ public class PostgreSQLTest  {
 		cdiContainer.shutdown();
 	}
 
-	/*
+	
+	@SuppressWarnings("unused")
 	private static void clearDatabase() {
 		EntityManager em = BeanProvider.getContextualReference(
 				EntityManager.class, false);
@@ -58,7 +61,7 @@ public class PostgreSQLTest  {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
-	*/
+	
 	
 	@Test
 	public void stringTest() throws Exception {

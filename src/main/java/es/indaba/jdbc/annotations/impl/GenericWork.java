@@ -77,6 +77,7 @@ public class GenericWork implements Work {
 		FieldResult[] fields = proceduresResult == null ? new FieldResult[0] : proceduresResult.value();
 
 		CallableStatement st = null;
+		ResultSet rs = null;
 		try {
 			st = con.prepareCall(procedureCall);
 			for (SQLParameter p : parameters) {
@@ -109,7 +110,7 @@ public class GenericWork implements Work {
 			if (!returnType.equals(void.class)) {
 				// Return instance
 				resultObject = returnType.newInstance();
-				ResultSet rs = st.getResultSet();
+				rs = st.getResultSet();
 				for (FieldResult field : fields) {
 					String property = field.name();
 					Object result = null;
@@ -123,8 +124,14 @@ public class GenericWork implements Work {
 				}
 			}
 		} catch (Exception e) {
+			
 			logger.log(Level.SEVERE, e.getMessage(), e);
+			
+		} finally {
+			if (rs!=null) rs.close();
+			if (st!=null) st.close();
 		}
+		
 	}
 
 	public Object getResultObject() {
