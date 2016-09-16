@@ -67,6 +67,19 @@ public class StoredProceduresTest extends AbstractTest {
 	}
 
 	@Test
+	public void doubleTest() throws Exception {
+		Double testVal = 1.2d;
+		DBTester dbTester = BeanProvider.getContextualReference(DBTester.class, false);
+		ProcedureResult<Double> result = dbTester.callEchoNumberAsFunction(testVal);
+		assertNotNull(result);
+		assertEquals(testVal, result.getValue());
+
+		result = dbTester.callEchoNumberAsProcedure(testVal);
+		assertNotNull(result);
+		assertEquals(testVal, result.getValue());
+	}
+	
+	@Test
 	public void dateTest() throws Exception {
 		Date testVal = new Date();
 		DBTester dbTester = BeanProvider.getContextualReference(DBTester.class, false);
