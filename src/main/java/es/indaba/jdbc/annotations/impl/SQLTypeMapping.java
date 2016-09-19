@@ -50,8 +50,8 @@ public class SQLTypeMapping {
 		java2SQL.put(Long.class, Types.BIGINT);
 		java2SQL.put(float.class, Types.FLOAT);
 		java2SQL.put(Float.class, Types.FLOAT);
-		java2SQL.put(double.class, Types.FLOAT);
-		java2SQL.put(Double.class, Types.FLOAT);
+		java2SQL.put(double.class, Types.DOUBLE);
+		java2SQL.put(Double.class, Types.DOUBLE);
 		java2SQL.put(Character.class, Types.CHAR);
 		java2SQL.put(char.class, Types.CHAR);
 		java2SQL.put(short.class, Types.SMALLINT);
@@ -94,6 +94,7 @@ public class SQLTypeMapping {
 			setter = c.getMethod("setFloat", int.class, float.class);
 			java2Setter.put(Float.class, setter);
 			java2Setter.put(float.class, setter);
+			setter = c.getMethod("setDouble", int.class, double.class);
 			java2Setter.put(Double.class, setter);
 			java2Setter.put(double.class, setter);
 			setter = c.getMethod("setShort", int.class, short.class);
@@ -122,6 +123,7 @@ public class SQLTypeMapping {
 			getter = c.getMethod("getFloat", int.class);
 			java2Getter.put(Float.class, getter);
 			java2Getter.put(float.class, getter);
+			getter = c.getMethod("getDouble", int.class);
 			java2Getter.put(Double.class, getter);
 			java2Getter.put(double.class, getter);
 			getter = c.getMethod("getShort", int.class);
