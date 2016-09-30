@@ -21,17 +21,21 @@ import javax.enterprise.inject.spi.BeanManager;
 
 import org.apache.deltaspike.core.api.provider.BeanManagerProvider;
 import org.apache.deltaspike.core.util.AnnotationUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import es.indaba.jdbc.annotations.api.StoredProcedure;
 import es.indaba.jdbc.annotations.api.StoredProcedureParameter;
 import es.indaba.jdbc.annotations.api.StoredProcedureResult;
 
 public class AnnotationProcessor {
-
+	
+	private static final Logger logger = LoggerFactory.getLogger(AnnotationProcessor.class);
+	
 	@SuppressWarnings("rawtypes")
 	public static GenericWork buildWork(Method method, Object[] parameters) throws Exception {
 
-		System.out.println("Entering method: " + method.getName() + " in class " + method.getDeclaringClass().getName());
+		logger.debug("DBCallCDI - Calling method: {}  in class {}",method.getName(), method.getDeclaringClass().getName());
 
 		BeanManager beanManager = BeanManagerProvider.getInstance().getBeanManager();
 		Annotation[] annotations = method.getAnnotations();

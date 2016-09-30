@@ -17,11 +17,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.hibernate.jdbc.Work;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import es.indaba.jdbc.annotations.api.FieldResult;
 import es.indaba.jdbc.annotations.api.StoredProcedure;
@@ -30,7 +30,7 @@ import es.indaba.jdbc.annotations.api.StoredProcedureResult;
 @SuppressWarnings("rawtypes")
 public class GenericWork implements Work {
 	
-	private static final Logger logger = Logger.getLogger(GenericWork.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(GenericWork.class);
 
 	StoredProcedure procedure;
 	StoredProcedureResult proceduresResult;
@@ -125,7 +125,8 @@ public class GenericWork implements Work {
 			}
 		} catch (Exception e) {
 			
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			logger.error("DBCallCDI - Error calling {}",procedureCall, e);
+			//TODO - Propagate exception out of this Work
 			
 		} finally {
 			if (rs!=null) rs.close();
