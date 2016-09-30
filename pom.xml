@@ -59,6 +59,7 @@
 		<hsqldb.version>2.3.3</hsqldb.version>
 		<postgresql.version>9.4-1201-jdbc4</postgresql.version>
 		<slf4j.version>1.7.21</slf4j.version>
+		<log4j.version>2.6.1</log4j.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -139,6 +140,18 @@
 			<version>${postgresql.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency><!-- Log4j2 SLF4J Binding -->
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>${log4j.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency><!-- Log4j2 Logging engine -->
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-core</artifactId>
+				<version>${log4j.version}</version>
+				<scope>runtime</scope>
+			</dependency>
 	</dependencies>
 	<build>
 		<plugins>
