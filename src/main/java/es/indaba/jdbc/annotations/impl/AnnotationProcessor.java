@@ -35,7 +35,7 @@ public class AnnotationProcessor {
 	@SuppressWarnings("rawtypes")
 	public static GenericWork buildWork(Method method, Object[] parameters) throws Exception {
 
-		logger.debug("DBCallCDI - Calling method: {}  in class {}",method.getName(), method.getDeclaringClass().getName());
+		logger.debug("DBCallCDI - Building GenericWork for method: {}  in class {}",method.getName(), method.getDeclaringClass().getName());
 
 		BeanManager beanManager = BeanManagerProvider.getInstance().getBeanManager();
 		Annotation[] annotations = method.getAnnotations();

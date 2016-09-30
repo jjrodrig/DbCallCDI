@@ -37,6 +37,8 @@ public class GenericWork implements Work {
 	List<SQLParameter> parameters;
 	Class returnType;
 	Object resultObject;
+	Exception workException;
+	
 
 	public StoredProcedure getProcedure() {
 		return procedure;
@@ -69,13 +71,17 @@ public class GenericWork implements Work {
 	public void setReturnType(Class returnType) {
 		this.returnType = returnType;
 	}
+	
+	public Exception getWorkException() {
+		return workException;
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void execute(Connection con) throws SQLException {
 		String procedureCall = procedure.value();
 		FieldResult[] fields = proceduresResult == null ? new FieldResult[0] : proceduresResult.value();
-
+		
 		CallableStatement st = null;
 		ResultSet rs = null;
 		try {
@@ -126,7 +132,7 @@ public class GenericWork implements Work {
 		} catch (Exception e) {
 			
 			logger.error("DBCallCDI - Error calling {}",procedureCall, e);
-			//TODO - Propagate exception out of this Work
+			workException = e;
 			
 		} finally {
 			if (rs!=null) rs.close();
