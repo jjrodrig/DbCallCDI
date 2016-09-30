@@ -64,15 +64,15 @@ public class AnnotationProcessor {
 			sqlParam.setValue(parameters[idx]);
 			params.add(sqlParam);
 
-			logger.debug("DBCallCDI {} - #{}  type: {} - sql-type:{}", sProc.value(), sqlParam.getPosition(),
-					sqlParam.getType(), sqlParam.getSqlType(), sqlParam.getValue());
+			logger.debug("DBCallCDI {} - #{}  type: {} - sql-type:{} value:{}", sProc.value(), sqlParam.getPosition(),
+					sqlParam.getType(), !sqlParam.getSqlType().equals(Object.class)?sqlParam.getSqlType():"<null>", sqlParam.getValue());
 
 			idx++;
 		}
 
 		Class returnClass = method.getReturnType();
 		
-        logger.debug("DBCallCDI {} - Return Type {}",returnClass);
+        logger.debug("DBCallCDI {} - Return Type {}",sProc.value(),returnClass);
         
 		GenericWork work = new GenericWork();
 		work.setProcedure(sProc);
